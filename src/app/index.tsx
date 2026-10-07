@@ -18,11 +18,11 @@
  *  4. Ejecuta en tu terminal: `pnpm run start:04`
  */
 
-import { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { BotonContador } from '@/components/BotonContador';
 import { ContadorDisplay } from '@/components/ContadorDisplay';
 import { calcularValor, estadoUI, type ContadorConfig } from '@/domain/counter';
+import { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function Home() {
   // 🔎 ¿Por qué el estado arranca en 0? ¿Qué cambiaría si empezara en otro valor?
@@ -37,13 +37,46 @@ export default function Home() {
   // 👉 Antes de implementar, revisa el TSDoc de `calcularValor` (src/domain/counter.ts):
   //    ahí está el contrato; tú escribes el cómo.
   const incrementar = () => {
-    
+    setValor(calcularValor(config, 'incrementar'));
   };
   const decrementar = () => {
-    
+    setValor(calcularValor(config, 'decrementar'));
   };
   const reiniciar = () => {
-    
+    setValor(0);
+  };
+
+  const [empanadas, setEmpanadas] = useState(0);
+  const configEmpanadas: ContadorConfig = { valor: empanadas, paso: 1, minimo: 0, maximo: 10 };
+  const estadoEmpanadas = estadoUI(empanadas, configEmpanadas);
+
+  const incEmpanadas = () => {
+    setEmpanadas(calcularValor(configEmpanadas, 'incrementar'));
+  };
+
+  const decEmpanadas = () => {
+    setEmpanadas(calcularValor(configEmpanadas, 'decrementar'));
+  };
+
+  const resetEmpanadas = () => {
+    setEmpanadas(0);
+  };
+
+  // 3. Contador de Jugos (CÓDIGO NUEVO AÑADIDO ABAJO)
+  const [jugos, setJugos] = useState(0);
+  const configJugos: ContadorConfig = { valor: jugos, paso: 1, minimo: 0, maximo: 10 };
+  const estadoJugos = estadoUI(jugos, configJugos);
+
+  const incJugos = () => {
+    setJugos(calcularValor(configJugos, 'incrementar'));
+  };
+
+  const decJugos = () => {
+    setJugos(calcularValor(configJugos, 'decrementar'));
+  };
+
+  const resetJugos = () => {
+    setJugos(0);
   };
 
   return (
@@ -71,8 +104,49 @@ export default function Home() {
           <BotonContador label="Reiniciar" onPress={reiniciar} variante="danger" />
         </View>
 
-        {/* 👇 TODO INTEGRADOR: agrega los contadores de Empanadas y Jugos
-            repitiendo el estado (const [.., ..] = useState(0)) y sus botones. */}
+        {/* Empanadas */}
+        <ContadorDisplay valor={empanadas} etiqueta="Empanadas" />
+        <View style={styles.actions}>
+          <BotonContador
+            label="+1"
+            onPress={incEmpanadas}
+            variante="primary"
+            disabled={estadoEmpanadas === 'MAXIMO'}
+          />
+          <BotonContador
+            label="-1"
+            onPress={decEmpanadas}
+            variante="secondary"
+            disabled={estadoEmpanadas === 'MINIMO'}
+          />
+          <BotonContador
+            label="Reiniciar"
+            onPress={resetEmpanadas}
+            variante="danger"
+          />
+        </View>
+
+        {/* Jugos */}
+        <ContadorDisplay valor={jugos} etiqueta="Jugos" />
+        <View style={styles.actions}>
+          <BotonContador
+            label="+1"
+            onPress={incJugos}
+            variante="primary"
+            disabled={estadoJugos === 'MAXIMO'}
+          />
+          <BotonContador
+            label="-1"
+            onPress={decJugos}
+            variante="secondary"
+            disabled={estadoJugos === 'MINIMO'}
+          />
+          <BotonContador
+            label="Reiniciar"
+            onPress={resetJugos}
+            variante="danger"
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
