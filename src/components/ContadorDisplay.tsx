@@ -4,7 +4,7 @@
  * Módulo: Programación Móvil — 3° Bachillerato Técnico (UETS)
  * ============================================================================
  *
- * 📖 MISIÓN:
+ * MISIÓN:
  * Componente "dummy": NO tiene estado, NO usa hooks. Solo recibe datos por
  * props y los dibuja. Debe reutilizarse para los 3 contadores del Bar Salesiano.
  *
@@ -15,29 +15,15 @@
 
 import { StyleSheet, Text, View } from 'react-native';
 
-/**
- * Props de `ContadorDisplay`.
- */
 export interface ContadorDisplayProps {
-  /** Número que se muestra (ya lo calculó el contenedor). */
   valor: number;
-  /** Texto opcional que describe el contador. Si no viene, no se dibuja. */
   etiqueta?: string;
 }
 
-/**
- * Muestra el valor de un contador.
- *
- * @remarks
- * Componente **presentacional** ("dummy"): no tiene estado ni hooks; solo recibe
- * props y las dibuja. Por eso se reutiliza para todos los contadores.
- *
- * @param props - Ver la interfaz `ContadorDisplayProps`.
- */
 export function ContadorDisplay({ valor, etiqueta }: ContadorDisplayProps) {
   return (
     <View style={styles.wrap}>
-      {/* 🤔 ¿Cómo muestras la etiqueta solo cuando viene, sin romper si falta? */}
+      {etiqueta ? <Text style={styles.etiqueta}>{etiqueta}</Text> : null}
       <Text style={styles.valor}>{valor}</Text>
     </View>
   );
