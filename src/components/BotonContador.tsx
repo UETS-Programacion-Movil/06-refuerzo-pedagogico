@@ -1,4 +1,4 @@
-/**
+ /**
  * ============================================================================
  * 🥊 RETO 03 — BotonContador (Pressable reutilizable)
  * Módulo: Programación Móvil — 3° Bachillerato Técnico (UETS)
@@ -78,10 +78,16 @@ const styles = StyleSheet.create({
     borderColor: '#0A0A0A',
     alignItems: 'center',
   },
-  // 🤔 ¿Qué propiedad de estilo necesita cada variante para pintarse con su color?
-  primary: {},
-  secondary: {},
-  danger: {},
+  // CHECK: ¿Qué propiedad de estilo necesita cada variante para pintarse con su color?
+  primary: {
+    backgroundColor: '#FDE047',
+  },
+  secondary: {
+    backgroundColor: '#38BDF8',
+  },
+  danger: {
+    backgroundColor: '#F43F5E',
+  },
   label: {
     fontWeight: '800',
     fontSize: 16,
