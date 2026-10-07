@@ -34,11 +34,12 @@ export interface ContadorDisplayProps {
  *
  * @param props - Ver la interfaz `ContadorDisplayProps`.
  */
-export function ContadorDisplay({ valor, etiqueta }: ContadorDisplayProps) {
+export function ContadorDisplay({ valor, etiqueta = ""}: ContadorDisplayProps) {
   return (
     <View style={styles.wrap}>
       {/* 🤔 ¿Cómo muestras la etiqueta solo cuando viene, sin romper si falta? */}
       <Text style={styles.valor}>{valor}</Text>
+      <Text style={styles.etiqueta}>{etiqueta}</Text>
     </View>
   );
 }

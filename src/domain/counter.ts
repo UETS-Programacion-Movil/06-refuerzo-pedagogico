@@ -53,7 +53,12 @@ export interface ContadorConfig {
  */
 export function calcularValor(config: ContadorConfig, direccion: Direccion): number {
   // 👇 TODO: reemplaza este return por tu lógica de cálculo
-  return config.valor;
+  switch(direccion){
+    case 'incrementar':
+      return (config.valor < config.maximo)? config.valor + config.paso: config.valor;
+    case 'decrementar':
+      return (config.valor > config.minimo)? config.valor - config.paso: config.valor;
+  }
 }
 
 /**
@@ -66,5 +71,12 @@ export function calcularValor(config: ContadorConfig, direccion: Direccion): num
  */
 export function estadoUI(valor: number, config: ContadorConfig): EstadoUI {
   // 👇 TODO: reemplaza este return por tu lógica de unión discriminada
-  return 'IDLE';
+  switch (valor){
+    case config.maximo:
+      return 'MAXIMO';
+    case config.minimo:
+      return 'MINIMO';
+    default:
+      return 'IDLE';
+  }
 }
