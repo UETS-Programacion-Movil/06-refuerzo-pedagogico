@@ -37,13 +37,13 @@ export default function Home() {
   // 👉 Antes de implementar, revisa el TSDoc de `calcularValor` (src/domain/counter.ts):
   //    ahí está el contrato; tú escribes el cómo.
   const incrementar = () => {
-    
+    setValor(calcularValor(config, 'incrementar'))
   };
   const decrementar = () => {
-    
+    setValor(calcularValor(config, 'decrementar'))
   };
   const reiniciar = () => {
-    
+    setValor(0);
   };
 
   return (
