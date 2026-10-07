@@ -9,12 +9,6 @@
  * El Bar Salesiano necesita contadores de productos (sanduches, empanadas,
  * jugos). Este archivo es el "motor" lógico: no usa React Native, solo
  * TypeScript puro, por eso se puede probar sin encender la app.
- *
- * 🛠️ RETO (responde con código, no con texto):
- *  1. En `calcularValor`: ¿qué operación aplicas al subir? ¿y al bajar? ¿cómo evitas
- *     salirte de `minimo`/`maximo`?
- *  2. En `estadoUI`: ¿cuándo el contador está en un extremo? ¿y cuándo no?
- *  3. Ejecuta en tu terminal: `pnpm run start:01`
  */
 
 export type Direccion = 'incrementar' | 'decrementar';
@@ -46,14 +40,15 @@ export interface ContadorConfig {
  * @param config - Configuración actual del contador (`valor`, `paso`, `minimo`, `maximo`).
  * @param direccion - `'incrementar'` para subir, `'decrementar'` para bajar.
  * @returns El nuevo valor, **siempre** dentro de `[minimo, maximo]`.
- *
- * @example
- * // Subir 1 desde 5 (con maximo 10) → 6
- * calcularValor({ valor: 5, paso: 1, minimo: 0, maximo: 10 }, 'incrementar');
  */
 export function calcularValor(config: ContadorConfig, direccion: Direccion): number {
-  // 👇 TODO: reemplaza este return por tu lógica de cálculo
-  return config.valor;
+  const candidato =
+    direccion === 'incrementar'
+      ? config.valor + config.paso
+      : config.valor - config.paso;
+
+  // Clamping: limita el valor para que no baje del mínimo ni suba del máximo
+  return Math.max(config.minimo, Math.min(config.maximo, candidato));
 }
 
 /**
@@ -65,6 +60,11 @@ export function calcularValor(config: ContadorConfig, direccion: Direccion): num
  *          `'IDLE'` en cualquier otro caso.
  */
 export function estadoUI(valor: number, config: ContadorConfig): EstadoUI {
-  // 👇 TODO: reemplaza este return por tu lógica de unión discriminada
+  if (valor === config.minimo) {
+    return 'MINIMO';
+  }
+  if (valor === config.maximo) {
+    return 'MAXIMO';
+  }
   return 'IDLE';
 }

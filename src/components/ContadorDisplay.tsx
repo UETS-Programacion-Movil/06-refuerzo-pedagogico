@@ -7,10 +7,6 @@
  * 📖 MISIÓN:
  * Componente "dummy": NO tiene estado, NO usa hooks. Solo recibe datos por
  * props y los dibuja. Debe reutilizarse para los 3 contadores del Bar Salesiano.
- *
- * 🛠️ RETO (responde con código):
- *  1. El valor ya se muestra; ¿cómo mostrarías la etiqueta **solo cuando exista**?
- *  2. Ejecuta en tu terminal: `pnpm run start:02`
  */
 
 import { StyleSheet, Text, View } from 'react-native';
@@ -37,7 +33,7 @@ export interface ContadorDisplayProps {
 export function ContadorDisplay({ valor, etiqueta }: ContadorDisplayProps) {
   return (
     <View style={styles.wrap}>
-      {/* 🤔 ¿Cómo muestras la etiqueta solo cuando viene, sin romper si falta? */}
+      {etiqueta && <Text style={styles.etiqueta}>{etiqueta}</Text>}
       <Text style={styles.valor}>{valor}</Text>
     </View>
   );
