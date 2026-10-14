@@ -77,11 +77,16 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#0A0A0A',
     alignItems: 'center',
+  },  
+  primary: {
+    backgroundColor: '#FDE047',
   },
-  // 🤔 ¿Qué propiedad de estilo necesita cada variante para pintarse con su color?
-  primary: {},
-  secondary: {},
-  danger: {},
+  secondary: {
+    backgroundColor: '#38BDF8',
+  },
+  danger: {
+    backgroundColor:'#F43F5E',
+  },
   label: {
     fontWeight: '800',
     fontSize: 16,
